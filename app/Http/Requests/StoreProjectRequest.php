@@ -24,19 +24,21 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string',''],
-            'content' => ['required','string',''],
-            'technology' => ['required','string',''],
+            'title' => ['required', 'string', ''],
+            'content' => ['required', 'string', ''],
+            'technology' => ['nullable', 'exists:technologies,id', ''],
 
-            'type_id' => ['nullable','exists:types,id'],
+            'type_id' => ['nullable', 'exists:types,id'],
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto è obbligatorio',
             'type_id.required' => 'La tipologia è obbligatoria',
-        ] ;
+            'technology.required' => 'La selezione della tecnologia è obbligatoria',
+        ];
     }
 }

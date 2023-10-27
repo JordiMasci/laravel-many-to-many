@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $project->type_id = $data['type_id'];
         $project->save();
 
-        $project->technologies()->attach([2,3]);
+        $project->technologies()->attach($data['technologies']);
         
         return redirect()->route('admin.projects.show', compact('project'));
 
