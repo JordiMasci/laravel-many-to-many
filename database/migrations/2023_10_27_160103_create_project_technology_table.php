@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('project_technology', function (Blueprint $table) {
             $table->id();
-            $table->foreingId('project_id')->constrained()->cascadeonDeLete();
+            $table->foreignId('project_id')->constrained()->cascadeonDeLete();
         });
     }
 

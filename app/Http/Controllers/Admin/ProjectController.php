@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -29,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -47,6 +49,8 @@ class ProjectController extends Controller
         $project->slug = Str::slug($project->title);
         $project->type_id = $data['type_id'];
         $project->save();
+
+        $project->technologies()->attach([2,3]);
         
         return redirect()->route('admin.projects.show', compact('project'));
 
