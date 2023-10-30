@@ -10,13 +10,12 @@
 
 
 @section('content')
-
     <div class="container mt-5">
         <div class="row g-5 mt-3">
             <div class="col-3">
                 <p>
                     <strong>Tipo</strong><br>
-                    {{ $project->type?->name}}
+                    {{ $project->type?->name }}
                 </p>
             </div>
             <div class="col-3">
@@ -31,6 +30,13 @@
                     {{ $project->created_at }}
                 </p>
             </div>
+            <div class="col-3">
+                <strong>Tecnologie</strong><br>
+                @foreach ($project->technologies as $technology)
+                    {{ $technology->name }}
+                @endforeach
+            </div>
+
             <div class="col-3">
                 <p>
                     <strong>Updated At</strong><br>
