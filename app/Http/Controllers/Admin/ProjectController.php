@@ -52,7 +52,7 @@ class ProjectController extends Controller
         $project->type_id = $data['type_id'];
         $project->save();
 
-        if(array_key_exists('technologies', $data))
+        if (array_key_exists('technologies', $data))
             $project->technologies()->attach($data['technologies']);
 
         return redirect()->route('admin.projects.show', compact('project'));
@@ -77,7 +77,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -86,14 +87,21 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project  $project
      */
-    public function update(Request $request, Project $project)
+    public function update(StoreProjectRequest $request, Project $project)
     {
-        $data = $request->all();
+        $data = $request->validated();
+
         $project->title = $data['title'];
         $project->content = $data['content'];
         $project->slug = Str::slug($project->title);
         $project->type_id = $data['type_id'];
         $project->save();
+
+        if (array_key_exists('technologies', $data))
+            $project->technologies()->sync($data['technologies']);
+        else
+            $project->technologies()->detach();
+        
         return redirect()->route('admin.projects.show', compact('project'));
     }
 

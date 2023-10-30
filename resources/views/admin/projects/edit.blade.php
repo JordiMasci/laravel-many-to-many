@@ -28,6 +28,18 @@
                 </select>
             </div>
 
+            <div class="col-12 my-4">
+                <div class="row">
+                    @foreach ($technologies as $technology)
+                        <div class="col-2">
+                            <input type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}"
+                                class="form-check-control">
+                            <label for="technologies">{{ $technology->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="col-12 mb-4">
                 <label for="content" class="form-label">Contenuto</label>
                 <textarea name="content" id="content" class="form-control" rows="5">{{ $project->content }}</textarea>
