@@ -26,7 +26,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => ['required', 'string', ''],
             'content' => ['required', 'string', ''],
-            'technology' => ['nullable', 'exists:technologies,id', ''],
+            'technologies' => ['nullable', 'exists:technologies,id', ''],
 
             'type_id' => ['nullable', 'exists:types,id'],
         ];
@@ -38,7 +38,7 @@ class StoreProjectRequest extends FormRequest
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto è obbligatorio',
             'type_id.required' => 'La tipologia è obbligatoria',
-            'technology.required' => 'La selezione della tecnologia è obbligatoria',
+            'technologies.required' => 'La selezione della tecnologia è obbligatoria',
         ];
     }
 }

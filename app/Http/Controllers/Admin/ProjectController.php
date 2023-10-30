@@ -43,6 +43,8 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        // dd($data);
+
         $project = new Project();
         $project->title = $data['title'];
         $project->content = $data['content'];
@@ -50,8 +52,9 @@ class ProjectController extends Controller
         $project->type_id = $data['type_id'];
         $project->save();
 
-        $project->technologies()->attach($data['technologies']);
-        
+        if(array_key_exists('technologies', $data))
+            $project->technologies()->attach($data['technologies']);
+
         return redirect()->route('admin.projects.show', compact('project'));
 
     }
@@ -85,13 +88,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-       $data = $request->all();
-       $project->title = $data['title'];
-       $project->content = $data['content'];
-       $project->slug = Str::slug($project->title);
-       $project->type_id = $data['type_id'];
-       $project->save();
-       return redirect()->route('admin.projects.show', compact('project'));
+        $data = $request->all();
+        $project->title = $data['title'];
+        $project->content = $data['content'];
+        $project->slug = Str::slug($project->title);
+        $project->type_id = $data['type_id'];
+        $project->save();
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**

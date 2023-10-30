@@ -45,7 +45,7 @@
                 <div class="row">
                     @foreach ($technologies as $technology)
                         <div class="col-2">
-                            <input type="checkbox" name="technologies" id="technologies" value="{{ $technology->id }}"
+                            <input type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}"
                                 class="form-check-control">
                             <label for="technologies">{{ $technology->name }}</label>
                         </div>
